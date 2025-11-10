@@ -1,0 +1,4 @@
+esphome:
+  name: esp-thermostat
+  friendly_name: Thermostat
+  

@@ -1,0 +1,21 @@
+button:
+  # Power management
+  - platform: restart
+    name: "[Restart]"
+    id: restart
+    icon: "mdi:restart"
+    entity_category: diagnostic
+
+  - platform: shutdown
+    name: "[Shutdown]"
+    id: shutdown
+    icon: "mdi:power"
+    internal: true
+    entity_category: diagnostic
+
+  - platform: safe_mode
+    name: "[Reboot Safe Mode]"
+    id: reboot_safe
+    icon: "mdi:restart-alert"
+    entity_category: diagnostic
+    internal: true

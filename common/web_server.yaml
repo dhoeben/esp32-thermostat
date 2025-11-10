@@ -1,0 +1,8 @@
+web_server:
+  port: 80
+  version: 3
+  auth:
+    username: !secret web_interface_username
+    password: !secret web_interface_password
+  ota: false
+  include_internal: true
