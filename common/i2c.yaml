@@ -1,0 +1,5 @@
+i2c:
+  sda: !secret pin_i2c_sda
+  scl: !secret pin_i2c_scl
+  scan: false
+  id: i2c_bus

@@ -1,0 +1,84 @@
+sensor:
+  # Temperature & humidity sensor
+  - platform: sht4x
+    i2c_id: i2c_bus
+    temperature:
+      id: temperature
+      name: "Thermostat Temperature"
+      accuracy_decimals: 2
+      filters:
+        - throttle: 120s
+    humidity:
+      id: humidity
+      name: "Thermostat Humidity"
+      accuracy_decimals: 1
+      filters:
+        - throttle: 120s
+    address: 0x44
+    update_interval: 120s
+
+  - platform: template
+    id: temperature_rounded
+    lambda: |-
+      if (isnan(id(temperature).state)) return NAN;
+      return round(id(temperature).state);
+    update_interval: 120s
+    accuracy_decimals: 0
+
+  - platform: template
+    id: humidity_rounded
+    lambda: |-
+      if (isnan(id(humidity).state)) return NAN;
+      return round(id(humidity).state);
+    update_interval: 120s
+    accuracy_decimals: 0
+
+  #Rotary switch
+  - platform: rotary_encoder
+    id: encoder
+    name: "Encoder Value"
+    pin_a: !secret pin_end_a
+    pin_b: !secret pin_end_b
+    resolution: 1
+    filters:
+      - debounce: 5ms
+    on_value:
+      then:
+        - logger.log: "Encoder rotated"
+
+
+  #Battery sensor
+  - platform: adc
+    id: battery_voltage
+    name: "Battery Voltage"
+    pin: !secret pin_adc_in            
+    attenuation: 11db
+    power_supply: batt_ps
+    update_interval: 12h
+    samples: 8
+    filters:
+      - multiply: 11.0   # voltage divider correction (100k/10k)
+      - throttle: 12h
+
+  - platform: template
+    id: battery_percent
+    name: "Battery Level"
+    unit_of_measurement: "%"
+    update_interval: 12h
+    lambda: |-
+      const float v = id(battery_voltage).state;
+      const float v_empty = 2.20f;
+      const float v_full  = 3.30f;
+      float p = (v - v_empty) / (v_full - v_empty) * 100.0f;
+      if (p < 0) p = 0;
+      if (p > 100) p = 100;
+      return p;
+    icon: mdi:battery
+
+  
+  # Home Assistant
+  - platform: homeassistant
+    name: "HA Set Temperature"
+    entity_id: !secret climate_entity
+    attribute: temperature
+    id: ha_set_temperature

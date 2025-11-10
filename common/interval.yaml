@@ -1,1 +1,30 @@
 interval:
+  - interval: 2min
+    then:
+      - lambda: |-
+          static float last_temp = NAN;
+          static int partial_count = 0;
+          static unsigned long last_full_refresh = 0;
+          const unsigned long six_hours = 6UL * 60UL * 60UL * 1000UL;  // 6h in ms
+
+          float current = id(temperature_rounded).state;
+          unsigned long now = millis();
+
+          if (isnan(current)) return;
+
+          // Alleen bij temperatuurverandering
+          if (current != last_temp) {
+            id(epd).update();  // partiële update
+            last_temp = current;
+            partial_count++;
+            ESP_LOGI("display", "Partial update #%d: %.0f°C", partial_count, current);
+          }
+
+          // Check of full refresh nodig is (tijd OF aantal)
+          if (partial_count >= 50 || now - last_full_refresh > six_hours) {
+            id(epd).full_update();
+            partial_count = 0;
+            last_full_refresh = now;
+            ESP_LOGI("display", "Full refresh triggered (reason: %s)",
+                     partial_count >= 50 ? "50 partials" : "6 hours");
+          }

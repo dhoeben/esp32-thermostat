@@ -1,0 +1,4 @@
+spi:
+  clk_pin: !secret pin_spi_clk
+  mosi_pin: !secret pin_spi_mosi
+  id: spi_epd

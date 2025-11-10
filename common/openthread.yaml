@@ -1,0 +1,4 @@
+openthread:
+  dataset: !secret thread_dataset
+  rx_on_when_idle: false       # sleepy end device
+  poll_period: 2000ms          # check parent every 2 s for messages

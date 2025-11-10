@@ -1,0 +1,10 @@
+binary_sensor:
+  - platform: gpio
+    name: "Encoder Switch"
+    pin:
+      number: !secret pin_end_sw
+      mode: INPUT_PULLUP
+      inverted: true
+    on_press:
+      then:
+        - logger.log: "Encoder pressed"

@@ -1,0 +1,11 @@
+display:
+  - platform: waveshare_epaper
+    id: epd
+    cs_pin: !secret pin_epd_cs
+    dc_pin: !secret pin_epd_dc
+    busy_pin: !secret pin_epd_busy
+    reset_pin: !secret pin_epd_res
+    model: 4.26in-bw  # GDEQ0426T82 model
+    rotation: 180
+    update_interval: never
+    full_update_every: 0 

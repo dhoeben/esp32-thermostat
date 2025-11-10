@@ -1,0 +1,5 @@
+# Zet de GPIO hieronder op de pin die bij ADC_EN hoort.
+power_supply:
+  - id: batt_ps
+    pin: !secret pin_adc_en
+    enable_time: 5ms

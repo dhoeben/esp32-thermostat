@@ -1,19 +1,22 @@
 # Packages required to run
 packages:
   - !include common/api.yaml
+  - !include common/display.yaml
   - !include common/esp32.yaml
   - !include common/esphome.yaml
+  - !include common/i2c.yaml
   - !include common/interval.yaml
   - !include common/logger.yaml
   - !include common/network.yaml
+  - !include common/openthread.yaml
   - !include common/ota.yaml
+  - !include common/spi.yaml
   - !include common/time.yaml
-  - !include common/web_server.yaml
-  - !include common/wifi.yaml
 
   # Entities for Home Assistant
+  - !include data/binary_sensor.yaml
   - !include data/button.yaml
+  - !include data/sensor.yaml
 
 # Components without config
-captive_portal:
 safe_mode:
