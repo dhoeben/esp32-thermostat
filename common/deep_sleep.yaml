@@ -1,0 +1,4 @@
+deep_sleep:
+  id: sleep_control
+  run_duration: 5s         # time to measure + transmit
+  sleep_duration: 55s      # 60 s total cycle

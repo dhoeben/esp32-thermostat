@@ -1,3 +1,10 @@
 time:
   - platform: homeassistant
-    id: esptime
+    id: ha_time
+
+    on_time:
+      - hours: [0, 6, 12, 18]
+        minutes: 0
+        seconds: 0
+        then:
+          - script.execute: epd_force_full_refresh

@@ -8,4 +8,4 @@ display:
     model: 4.26in-bw  # GDEQ0426T82 model
     rotation: 180
     update_interval: never
-    full_update_every: 0 
+    full_update_every: 50 

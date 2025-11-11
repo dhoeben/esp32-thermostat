@@ -2,22 +2,18 @@ sensor:
   # Temperature & humidity sensor
   - platform: sht4x
     i2c_id: i2c_bus
+    address: 0x44
     temperature:
       id: temperature
       name: "Thermostat Temperature"
       icon: mdi:thermometer
       accuracy_decimals: 2
-      filters:
-        - throttle: 120s
     humidity:
       id: humidity
       name: "Thermostat Humidity"
       icon: mdi:water-percent
       accuracy_decimals: 1
-      filters:
-        - throttle: 120s
-    address: 0x44
-    update_interval: 120s
+    update_interval: never
 
   - platform: template
     id: temperature_rounded
@@ -42,15 +38,27 @@ sensor:
   - platform: rotary_encoder
     id: encoder
     name: "Encoder Value"
-    pin_a: !secret pin_end_a
-    pin_b: !secret pin_end_b
-    resolution: 1
+    pin_a:
+      number: !secret pin_enc_a
+      mode:
+        input: true
+        pullup: true
+    pin_b:
+      number: !secret pin_enc_b
+      mode:
+        input: true
+        pullup: true
+    resolution: 2
     internal: true
+    debounce: 4ms
     filters:
       - debounce: 5ms
-    on_value:
+    on_clockwise:
       then:
-        - logger.log: "Encoder rotated"
+        - logger.log: "Encoder rotated clockwise"
+    on_anticlockwise:
+      then:
+        - logger.log: "Encoder rotated anticlockwise"
 
 
   #Battery sensor

@@ -1,6 +1,7 @@
 # Packages required to run
 packages:
   - !include common/api.yaml
+  - !include common/deep_sleep.yaml
   - !include common/display.yaml
   - !include common/esp32.yaml
   - !include common/esphome.yaml
@@ -13,11 +14,16 @@ packages:
   - !include common/power_supply.yaml
   - !include common/spi.yaml
   - !include common/time.yaml
+  - !include common/uart.yaml
 
   # Entities for Home Assistant
   - !include data/binary_sensor.yaml
   - !include data/button.yaml
+  - !include data/globals.yaml
+  - !include data/script.yaml
   - !include data/sensor.yaml
+  - !include data/switch.yaml
+  - !include data/text_sensor.yaml
 
 # Components without config
 safe_mode:

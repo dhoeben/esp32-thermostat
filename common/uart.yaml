@@ -1,0 +1,5 @@
+uart:
+  id: usb_uart
+  tx_pin: !secret pin_uart_tx
+  rx_pin: !secret pin_uart_rx
+  baud_rate: 115200

@@ -1,0 +1,10 @@
+script:
+  - id: epd_force_full_refresh
+    mode: restart
+    then:
+      - lambda: |-
+          id(epd).set_full_update_every(1);
+      - component.update: epd
+      - delay: 200ms
+      - lambda: |-
+          id(epd).set_full_update_every(50);

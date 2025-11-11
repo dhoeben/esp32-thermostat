@@ -1,16 +1,18 @@
 binary_sensor:
+  # Encoder button
   - platform: gpio
-    name: "Encoder Switch"
-    entity_category: diagnostic
-    icon: mdi:electric-switch
+    id: enc_switch
+    name: "Rotary Encoder Button"
     pin:
-      number: !secret pin_button_en
-      mode: INPUT_PULLUP
-      inverted: true
+      number: !secret pin_enc_sw
+      mode:
+        input: true
+        pullup: true
+      inverted: true  
     on_press:
-      then:
-        - logger.log: "Encoder pressed"
+      - logger.log: "Rotary encoder switch pressed"
 
+  # Low battery warning
   - platform: template
     id: low_battery
     name: "Low Battery"

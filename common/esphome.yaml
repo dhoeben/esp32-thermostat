@@ -2,3 +2,8 @@ esphome:
   name: esp-thermostat
   friendly_name: Thermostat
   
+  on_boot:
+    priority: -100
+    then:
+      # Disable display/sensor power at boot until needed
+      - switch.turn_off: adc_enable

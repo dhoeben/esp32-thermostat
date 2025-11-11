@@ -1,0 +1,5 @@
+globals:
+  - id: partial_count
+    type: int
+    restore_value: yes
+    initial_value: '0'

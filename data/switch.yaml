@@ -1,0 +1,8 @@
+switch:
+  - platform: gpio
+    id: adc_enable
+    pin:
+      number: !secret pin_adc_en
+      mode:
+        output: true
+    restore_mode: ALWAYS_OFF
