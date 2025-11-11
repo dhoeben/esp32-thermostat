@@ -5,12 +5,14 @@ sensor:
     temperature:
       id: temperature
       name: "Thermostat Temperature"
+      icon: mdi:thermometer
       accuracy_decimals: 2
       filters:
         - throttle: 120s
     humidity:
       id: humidity
       name: "Thermostat Humidity"
+      icon: mdi:water-percent
       accuracy_decimals: 1
       filters:
         - throttle: 120s
@@ -19,14 +21,17 @@ sensor:
 
   - platform: template
     id: temperature_rounded
+    name: "Temperature Rounded"
+    internal: true
+    update_interval: 10s
     lambda: |-
       if (isnan(id(temperature).state)) return NAN;
-      return round(id(temperature).state);
-    update_interval: 120s
-    accuracy_decimals: 0
+      return roundf(id(temperature).state);
 
   - platform: template
     id: humidity_rounded
+    name: "Humidity rounded"
+    internal: true
     lambda: |-
       if (isnan(id(humidity).state)) return NAN;
       return round(id(humidity).state);
@@ -40,6 +45,7 @@ sensor:
     pin_a: !secret pin_end_a
     pin_b: !secret pin_end_b
     resolution: 1
+    internal: true
     filters:
       - debounce: 5ms
     on_value:
@@ -54,6 +60,7 @@ sensor:
     pin: !secret pin_adc_in            
     attenuation: 11db
     power_supply: batt_ps
+    internal: true
     update_interval: 12h
     samples: 8
     filters:
@@ -80,5 +87,6 @@ sensor:
   - platform: homeassistant
     name: "HA Set Temperature"
     entity_id: !secret climate_entity
+    internal: true
     attribute: temperature
     id: ha_set_temperature

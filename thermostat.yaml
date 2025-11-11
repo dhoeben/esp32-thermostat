@@ -10,6 +10,7 @@ packages:
   - !include common/network.yaml
   - !include common/openthread.yaml
   - !include common/ota.yaml
+  - !include common/power_supply.yaml
   - !include common/spi.yaml
   - !include common/time.yaml
 

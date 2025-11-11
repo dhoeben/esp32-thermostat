@@ -6,4 +6,4 @@ api:
   services:
     - service: reboot_gateway
       then:
-        - button.press: restart_ot
+        - button.press: restart

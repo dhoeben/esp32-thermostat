@@ -5,17 +5,18 @@ button:
     id: restart
     icon: "mdi:restart"
     entity_category: diagnostic
+    device_class: restart
 
   - platform: shutdown
     name: "[Shutdown]"
     id: shutdown
     icon: "mdi:power"
-    internal: true
     entity_category: diagnostic
+    disabled_by_default: true
 
   - platform: safe_mode
     name: "[Reboot Safe Mode]"
     id: reboot_safe
     icon: "mdi:restart-alert"
     entity_category: diagnostic
-    internal: true
+    disabled_by_default: true

@@ -3,16 +3,19 @@ text_sensor:
     name: "HA HVAC Mode"
     entity_id: !secret climate_entity
     attribute: hvac_mode
+    internal: true
     id: ha_hvac_mode
 
   - platform: homeassistant
     name: "HA Preset Mode"
     entity_id: !secret climate_entity
     attribute: preset_mode
+    internal: true
     id: ha_preset_mode
 
   - platform: homeassistant
     name: "HA HVAC Action"
     entity_id: !secret climate_entity
     attribute: hvac_action
+    internal: true
     id: ha_hvac_action

@@ -1,10 +1,25 @@
 binary_sensor:
   - platform: gpio
     name: "Encoder Switch"
+    entity_category: diagnostic
+    icon: mdi:electric-switch
     pin:
-      number: !secret pin_end_sw
+      number: !secret pin_button_en
       mode: INPUT_PULLUP
       inverted: true
     on_press:
       then:
         - logger.log: "Encoder pressed"
+
+  - platform: template
+    id: low_battery
+    name: "Low Battery"
+    icon: mdi:battery-alert-variant-outline
+    device_class: battery
+    entity_category: diagnostic
+    lambda: |-
+      if (isnan(id(battery_percent).state)) return {};
+      return (id(battery_percent).state < 15.0);
+    filters:
+      - delayed_on: 5min
+      - delayed_off: 10min
