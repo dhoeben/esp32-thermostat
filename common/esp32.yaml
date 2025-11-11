@@ -1,5 +1,5 @@
 esp32:
-  board: esp32-h2-devkitm-1
+  board: esp32-h2-mini-1
   variant: esp32h2
   framework:
     type: esp-idf
